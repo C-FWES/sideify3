@@ -23,6 +23,18 @@ export interface Album {
         cover:
           "https://i.pinimg.com/736x/6c/82/05/6c8205317b8f1b87fd21635988f3c3a4.jpg",
     },
+    {
+        name: "Supernatural",
+        artist: "NewJeans",
+        cover:
+          "https://i.pinimg.com/736x/83/be/3f/83be3fb4bc69d856b744760abf537de8.jpg",
+    },
+    {
+        name: "After LIKE",
+        artist: "IVE",
+        cover:
+          "https://i.pinimg.com/736x/ef/d7/62/efd7629b25d0cee32f9ef1b879d1f065.jpg",
+    },
   ]
 
   export const madeForYouAlbums: Album[] = [

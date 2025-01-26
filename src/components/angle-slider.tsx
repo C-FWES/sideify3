@@ -34,28 +34,37 @@ const AngleSlider: React.FC = () => {
   }
 
   // Calculate slider head position
-  const radius = 100
-  const centerX = 110
-  const centerY = 110
-  const sliderX = centerX + radius * Math.cos(angle * (Math.PI / 180))
-  const sliderY = centerY + radius * Math.sin(angle * (Math.PI / 180))
+  const radius = 80
+  const circleRadius = 92
+  const centerX = 90
+  const centerY = 90
+  const sliderX = centerX + circleRadius * Math.cos(angle * (Math.PI / 180))
+  const sliderY = centerY + circleRadius * Math.sin(angle * (Math.PI / 180))
 
   return (
     <div className="flex items-center justify-center space-x-8">
       <svg ref={svgRef} width="220" height="220" onMouseDown={handleMouseDown} className="cursor-pointer">
         {/* Outer circle */}
-        <circle cx={centerX} cy={centerY} r={radius} fill="none" stroke="#e2e8f0" strokeWidth="4" />
+        <circle cx={centerX} cy={centerY} r={radius} fill="none" stroke="#e5e7eb" strokeWidth="2" />
         {/* Angle arc */}
         <path
           d={`M ${centerX} ${centerY} L ${centerX + radius} ${centerY} A ${radius} ${radius} 0 ${
             angle > 180 ? 1 : 0
           } 1 ${sliderX} ${sliderY} Z`}
-          fill="rgba(59, 130, 246, 0.2)"
+          fill="transparent"
         />
         {/* Slider head */}
-        <circle cx={sliderX} cy={sliderY} r="10" fill="#3b82f6" />
+        <rect
+            x={centerX - 80}
+            y={centerY - 10}
+            width="160"
+            height="20"
+            fill="black"
+            transform={`rotate(${angle}, ${centerX}, ${centerY})`}
+          ></rect>
+          <circle cx={sliderX} cy={sliderY} r="10" fill="black" />
       </svg>
-      <div className="text-2xl font-semibold">{angle}°</div>
+      <div className="text-m font-semibold">{angle}°</div>
     </div>
   )
 }

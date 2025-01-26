@@ -20,6 +20,7 @@ import { listenNowAlbums, madeForYouAlbums } from "./data/albums"
 import { AlbumArtwork } from "./components/album-artwork"
 import { playlists } from "./data/playlists"
 import MusicControlBar from "./components/music-control-bar"
+import { useState } from "react"
 
 export const metadata: Metadata = {
   title: "Sideify",
@@ -27,6 +28,15 @@ export const metadata: Metadata = {
 }
 
 export default function MusicPage() {
+
+
+    const [activeSongPath, setActiveSongPath] = useState()
+
+    function getActiveSong(selection) {
+        setActiveSongPath(selection)
+    }
+    
+
   return (
     <>
       <div className="md:hidden">
@@ -37,7 +47,7 @@ export default function MusicPage() {
         <div className="border-t">
           <div className="bg-background">
             <div className="grid lg:grid-cols-5">
-              <Sidebar playlists={playlists} className="hidden lg:block" />
+              <Sidebar playlists={playlists} getActiveSong={getActiveSong} className="hidden lg:block" />
               <div className="col-span-3 lg:col-span-4 lg:border-l">
                 <div className="h-full px-4 py-6 lg:px-8">
                   <Tabs defaultValue="music" className="h-full space-y-6">
@@ -76,7 +86,7 @@ export default function MusicPage() {
                                 className="w-[250px]"
                                 aspectRatio="portrait"
                                 width={250}
-                                height={330}
+                                height={280}
                               />
                             ))}
                           </div>
@@ -127,7 +137,7 @@ export default function MusicPage() {
                 </div>
               </div>
             </div>
-            <MusicControlBar />
+            <MusicControlBar selectedSongPath={activeSongPath}/>
           </div>
         </div>
       </div>

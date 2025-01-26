@@ -2,8 +2,9 @@ import { useState, useEffect } from "react"
 import { Play, Pause, SkipBack, SkipForward } from "lucide-react"
 import { Slider } from "@/components/ui/slider"
 import { Button } from "@/components/ui/button"
+import path from "path"
 
-export default function MusicControlBar() {
+export default function MusicControlBar({selectedSongPath = ""}) {
   const [isPlaying, setIsPlaying] = useState(false)
   const [currentTime, setCurrentTime] = useState(0)
   const duration = 180 // Total duration in seconds (3 minutes for this example)
@@ -49,6 +50,8 @@ export default function MusicControlBar() {
   return (
     <div className="fixed bottom-0 left-0 right-0 bg-white text-black p-4 shadow-lg border-t-2">
       <div className="max-w-3xl mx-auto">
+      <div className="flex items-center justify-center"><p>{path.basename(selectedSongPath, path.extname(selectedSongPath))}</p></div>
+      <div className="py-2"></div>
         <div className="flex items-center justify-center space-x-4 mb-2">
           <Button variant="ghost" size="icon" onClick={handleSkipBack} className="text-gray-600 hover:text-black">
             <SkipBack className="h-6 w-6" />

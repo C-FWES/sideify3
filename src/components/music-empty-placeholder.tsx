@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button"
+import { useState } from 'react'
 import {
   Dialog,
   DialogContent,
@@ -10,8 +11,26 @@ import {
 } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { saveAs } from 'file-saver'
 
 export function PodcastEmptyPlaceholder() {
+
+    const [selectedFile, setSelectedFile] = useState(null);
+
+    const handleFileChange = (event) => {
+      setSelectedFile(event.target.files[0]);
+    };
+  
+    const handleSave = () => {
+      if (selectedFile) {
+        // saveAs(selectedFile, `./src/unprocessed/${selectedFile.name}`); 
+        saveAs(selectedFile, `unprocessed_${selectedFile.name}`)
+      } else {
+        alert('Please select a file first.');
+      }
+    };
+
+
   return (
     <div className="flex h-[450px] shrink-0 items-center justify-center rounded-md border border-dashed">
       <div className="mx-auto flex max-w-[420px] flex-col items-center justify-center text-center">
@@ -38,21 +57,18 @@ export function PodcastEmptyPlaceholder() {
               Select
             </Button>
           </DialogTrigger>
-          <DialogContent>
+          <DialogContent className="bg-white">
             <DialogHeader>
-              <DialogTitle>Add Podcast</DialogTitle>
+              <DialogTitle>Select WAV File</DialogTitle>
               <DialogDescription>
-                Copy and paste the podcast feed URL to import.
+                Choose a WAV file to use.
               </DialogDescription>
             </DialogHeader>
-            <div className="grid gap-4 py-4">
-              <div className="grid gap-2">
-                <Label htmlFor="url">Podcast URL</Label>
-                <Input id="url" placeholder="https://example.com/feed.xml" />
-              </div>
-            </div>
+            {/* Here's where the change happens */}
+            <input type="file" accept=".wav" onChange={handleFileChange}/>
+             {/* Add an input element for file selection */}
             <DialogFooter>
-              <Button>Import Podcast</Button>
+              <Button onClick={handleSave}>Import</Button>
             </DialogFooter>
           </DialogContent>
         </Dialog>
