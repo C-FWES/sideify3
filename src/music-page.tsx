@@ -86,7 +86,7 @@ export default function MusicPage() {
                                 className="w-[250px]"
                                 aspectRatio="portrait"
                                 width={250}
-                                height={280}
+                                height={200}
                               />
                             ))}
                           </div>
